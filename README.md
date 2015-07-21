@@ -5,7 +5,7 @@ ps - Check out Machine Learning by Tom Mitchell. For ML Junkies (like me), it is
 
 #Input format:
 
-the file "examples" contains, in each line, first the x input value, second the y input value and finally the output.
+the file "examples" contains, in each line, first the x input value, second the y input value and finally the output. **Generate.py** is the script that generates the training examples based on the hardcoded equation.
 For example, in delta rule, examples contains:
 
 **1550 1003 13859**
