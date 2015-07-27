@@ -1,0 +1,5 @@
+Locally Weighted Regression is simply a modified version of kNN algorithm for real-valued function.
+
+We find the k nearest neighbours of the query point just like in standard kNN. The main difference arises after that:
+
+**Whereas in traditional kNN, we would simply take the mean of all example outputs and elicit that as the output, it is not the same in case of LWR. Instead of the simple mean, we use other functions (such as neural networks, linear regression, decision trees, etc.) in order to approximate the output. This output will most likely be more accurate than that of the simple average.**
