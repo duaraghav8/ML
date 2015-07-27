@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+#
+#
+#
+#NOTE: Script is not very accurate because of various values I have chosen (number of neighbours to consider, stopping condition and learning rate)
+#To give you a better idea, I have also included the average of the values of nearest neighbours (the traditional way in k-NN).
+#It cannot be used for real world data. It is, however, a proof of concept.
+#
+#
+#
 from random import randint, random;
 
 def train (xWeight, yWeight, examples, learnRate):
