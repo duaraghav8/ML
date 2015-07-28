@@ -17,8 +17,9 @@ if (__name__ == '__main__'):
 	neighbours = 5;
 	nearest = [];
 	mean = 0;
+	weightTotal = 0;
 
-	print ("Running k-NN Algorithm for Query Point: ", queryPoint, "with k = ", neighbours);
+	print ("Running weighted k-NN Algorithm for Query Point: ", queryPoint, "with k = ", neighbours);
 	for line in lines:
 		example = [int (i) for i in line.split ()];
 		examples.append (example);
@@ -29,14 +30,17 @@ if (__name__ == '__main__'):
 	for i in range (0, neighbours):
 		pos = distances.index (min (distances));
 		nearest.append (examples [pos]);
-		mean += examples [pos] [2];
+
+		weight = (1 / (distances [pos] ** 2) );
+		mean += (examples [pos] [2]) * weight;
+		weightTotal += weight;
 
 		examples.remove (examples [pos]);
 		distances.remove (distances [pos]);
 
-	mean /= neighbours;
+	mean /= weightTotal;
 
 #in case you wish to see which are the nearest neighbours
-#	rint (nearest);
+#	print (nearest);
 
 	print ( "Query point output: ", mean);
