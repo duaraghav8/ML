@@ -22,6 +22,12 @@ if (__name__ == '__main__'):
 	numOfAN = 0;
 	numOfBN = 0;
 	numOfCN = 0;
+	lenP = 0;
+	lenN = 0;
+	priorEstimateA = 1 / 25;
+	priorEstimateB = 1 / 25;
+	priorEstimateC = 1 / 25;
+	equivSampleSize = 0.2;
 
 	for i in range (0, len (examples)):
 		x = examples [i].split ();
@@ -33,6 +39,8 @@ if (__name__ == '__main__'):
 	                                numOfBP += 1;
 				if (not x [2].find (q) == -1):
 	                                numOfCP += 1;
+			lenP += 1;
+
 		else:
 			for q in query:
                                 if (not x [0].find (q) == -1):
@@ -41,13 +49,14 @@ if (__name__ == '__main__'):
                                         numOfBN += 1;
                                 if (not x [2].find (q) == -1):
                                         numOfCN += 1;
+			lenN += 1;
 
-	numOfAP /= len (examples);
-	numOfBP /= len (examples);
-	numOfCP /= len (examples);
-	numOfAN /= len (examples);
-	numOfBN /= len (examples);
-	numOfCN /= len (examples);
+	probAP = (numOfAP + (equivSampleSize * priorEstimateA)) / (lenP + equivSampleSize);
+	probBP = (numOfBP + (equivSampleSize * priorEstimateB)) / (lenP + equivSampleSize);
+	probCP = (numOfCP + (equivSampleSize * priorEstimateC)) / (lenP + equivSampleSize);
+	probAN = (numOfAN + (equivSampleSize * priorEstimateA)) / (lenP + equivSampleSize);
+	probBN = (numOfBN + (equivSampleSize * priorEstimateB)) / (lenP + equivSampleSize);
+	probCN = (numOfCN + (equivSampleSize * priorEstimateC)) / (lenP + equivSampleSize);
 
-	print ( (numOfAP * numOfBP * numOfCP) * pClassPositive);
-	print ( (numOfAN * numOfBN * numOfCN) * pClassNegative);
+	print ( (probAP * probBP * probCP) * pClassPositive);
+	print ( (probAN * probBN * probCN) * pClassNegative);
