@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-#
-#
-#UNDER CONSTRUCTION#
-#
-#
-#
 from random import *;
 
 if (__name__ == '__main__'):
