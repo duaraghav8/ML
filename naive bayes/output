@@ -1,0 +1,4 @@
+Input a query string (the format is 3 space seperated numbers pertaining to the 3 attributes, each between 0 and 25 inclusive): 
+Query: 15 12 22 is classified as Negative
+Negative probability =  0.0010365398155634418
+Positive probability =  0.0005165632982300084
