@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
-#
-#
-#UNDER CONSTRUCTION#
-#
-#
-#
 from random import *;
 
 if (__name__ == '__main__'):
 	examples = open ('examples', 'r').readlines ();
-	query = '17 12 22'.split ();		#the classification should be negative (-)
+	queryString = input ("Input a query string (the format is 3 space seperated numbers pertaining to the 3 attributes, each between 0 and 25 inclusive): ");
+	query = queryString.split ();
 
 	classifications = [i [-2] for i in examples];
 	pPositive = classifications.count ('+') / len (classifications);	#probability that the new query will be classified as Positive
 	pNegative = classifications.count ('-') / len (classifications);	#same as above, for negative
+	lenP = int (len (classifications) * pPositive);
+	lenN = int (len (classifications) * pNegative);
+
 	pClassPositive = 0;
 	pClassNegative = 0;
 	numOfAP = 0;
@@ -33,6 +31,8 @@ if (__name__ == '__main__'):
 	                                numOfBP += 1;
 				if (not x [2].find (q) == -1):
 	                                numOfCP += 1;
+#			lenP += 1;
+
 		else:
 			for q in query:
                                 if (not x [0].find (q) == -1):
@@ -41,13 +41,12 @@ if (__name__ == '__main__'):
                                         numOfBN += 1;
                                 if (not x [2].find (q) == -1):
                                         numOfCN += 1;
+#			lenN += 1;
+#			print (numOfAN, numOfBN, numOfCN);
 
-	numOfAP /= len (examples);
-	numOfBP /= len (examples);
-	numOfCP /= len (examples);
-	numOfAN /= len (examples);
-	numOfBN /= len (examples);
-	numOfCN /= len (examples);
+	pClassifyPositive = ( (numOfAP / lenP) * (numOfBP / lenP) * (numOfCP / lenP) ) * pPositive;
+	pClassifyNegative = ( (numOfAN / lenN) * (numOfBN / lenN) * (numOfCN / lenN) ) * pNegative;
 
-	print ( (numOfAP * numOfBP * numOfCP) * pClassPositive);
-	print ( (numOfAN * numOfBN * numOfCN) * pClassNegative);
+	print ("Query: " + queryString + " is classified as " + ("Negative" if pClassifyNegative > pClassifyPositive else "Positve"));
+	print ("Negative probability = ", pClassifyNegative);
+	print ("Positive probability = ", pClassifyPositive);
