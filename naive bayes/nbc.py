@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from random import *;
 
+#Code is currently buggy and unfit for use
+
 if (__name__ == '__main__'):
 	examples = open ('examples', 'r').readlines ();
 	queryString = input ("Input a query string (the format is 3 space seperated numbers pertaining to the 3 attributes, each between 0 and 25 inclusive): ");
