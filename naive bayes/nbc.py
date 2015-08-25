@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 from random import *;
 
-#Code is currently buggy and unfit for use
-
 if (__name__ == '__main__'):
 	examples = open ('examples', 'r').readlines ();
-	queryString = input ("Input a query string (the format is 3 space seperated numbers pertaining to the 3 attributes, each between 0 and 25 inclusive): ");
+	queryString = input ("Input a query string (the format is 3 space seperated numbers pertaining to the 3 attributes, each between 1 and 25 inclusive): ");
 	query = queryString.split ();
 
 	classifications = [i [-2] for i in examples];
@@ -22,6 +20,8 @@ if (__name__ == '__main__'):
 	numOfAN = 0;
 	numOfBN = 0;
 	numOfCN = 0;
+	priorEstimate = 1 / 25;
+	equivSample = 0.3;
 
 	for i in range (0, len (examples)):
 		x = examples [i].split ();
@@ -46,8 +46,8 @@ if (__name__ == '__main__'):
 #			lenN += 1;
 #			print (numOfAN, numOfBN, numOfCN);
 
-	pClassifyPositive = ( (numOfAP / lenP) * (numOfBP / lenP) * (numOfCP / lenP) ) * pPositive;
-	pClassifyNegative = ( (numOfAN / lenN) * (numOfBN / lenN) * (numOfCN / lenN) ) * pNegative;
+	pClassifyPositive = ( ( (numOfAP + (equivSample * priorEstimate)) / (lenP + equivSample) ) * ( (numOfBP + (equivSample * priorEstimate)) / (lenP + equivSample) ) * ( (numOfCP + (equivSample * priorEstimate)) / (lenP + equivSample)) ) * pPositive;
+	pClassifyNegative = ( ( (numOfAN + (equivSample * priorEstimate)) / (lenN + equivSample)) * ( (numOfBN + (equivSample * priorEstimate)) / (lenN + equivSample)) * (numOfCN + (equivSample * priorEstimate)) / (lenN + equivSample) ) * pNegative;
 
 	print ("Query: " + queryString + " is classified as " + ("Negative" if pClassifyNegative > pClassifyPositive else "Positve"));
 	print ("Negative probability = ", pClassifyNegative);
