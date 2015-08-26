@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from random import *;
 
+#generates 500 Positive examples which do not exist in the training set
 if (__name__ == '__main__'):
 	examples = open ('examples', 'r').readlines ();
 	testSet = [];
