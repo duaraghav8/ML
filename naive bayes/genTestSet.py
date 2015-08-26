@@ -16,7 +16,7 @@ if (__name__ == '__main__'):
 	a3 = concept ['a3'].split (',') [1 : -1];
 
 	while (not len (testSet) == 500):
-		attributes = choice (a1) + ' ' + choice (a2) +  ' ' + choice (a3) + ' ' + '+';
+		attributes = choice (a1) + ' ' + choice (a2) +  ' ' + choice (a3);
 		noExist = True;
 		for x in examples:
 			if (x == attributes):
